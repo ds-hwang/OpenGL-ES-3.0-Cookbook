@@ -1,0 +1,3 @@
+Known Issues:-
+===============
+1. Recipes implemented in this chapter are presently only available on iOS platform, the porting on Android platform is underprogess. 

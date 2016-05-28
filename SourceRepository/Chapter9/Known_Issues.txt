@@ -1,0 +1,3 @@
+Known Issues:-
+===============
+1. Recipe 'SphereWithTextureQuad' has an unknown bug where it does not works always, user are requested to launch the application at least 3-4 time to give a hit-trial if the screen is appearing blank, the bug will be resolved in the next source code update. 

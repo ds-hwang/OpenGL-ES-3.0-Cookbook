@@ -1,0 +1,5 @@
+Known Issues:-
+===============
+1. SG3cTransformationGraph: Due to unknown reason the picking on Android is not working sometimes. It working correct on iOS.
+2. SG6_withSG5+ButtonPicking: Picking is working incorrect in Android, however the iOS version working fine. Please refer to iOS version until this bug is not fixed.
+3. SG7_withSG6+Camera: Picking in failing on Android, please refer to iOS version of this recipe.

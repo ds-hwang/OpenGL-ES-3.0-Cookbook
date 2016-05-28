@@ -1,0 +1,55 @@
+// Vertex information
+attribute vec4  VertexPosition;
+
+// Model View Project matrix
+uniform mat4    MODELVIEWPROJECTIONMATRIX;
+uniform mat4    MODELVIEWMATRIX;
+
+// Object's Light and Material information
+uniform vec3    MaterialAmbient;
+uniform vec3    MaterialSpecular;
+uniform vec3    MaterialDiffuse;
+
+uniform vec3    LightAmbient;
+uniform vec3    LightSpecular;
+uniform vec3    LightDiffuse;
+
+uniform vec3    LightPosition;
+uniform float   ShininessFactor;
+
+
+attribute vec3  Normal;
+uniform mat3    NormalMatrix;
+varying vec4    FinalColor;
+
+
+void main() 
+{
+/*
+    vec3 nNormal   = normalize ( NormalMatrix * Normal );
+    vec3 pos       = vec3 ( MODELVIEWMATRIX * VertexPosition );
+    vec3 nLight    = normalize( LightPosition - pos );
+    
+    float cosAngle = max( 0.0, dot( nNormal, nLight ));
+
+    vec3 diffuse   = MaterialDiffuse  * LightDiffuse;
+    vec3 color 	   = cosAngle * diffuse;
+*/
+    vec3 NormalVector = normalize(NormalMatrix * Normal);
+    vec3 LightVector = normalize(LightPosition);
+    vec3 E = vec3(0, 0, 1);
+    vec3 H = normalize(LightVector + E);
+
+    float df = max( 0.0, dot( NormalVector, LightVector ));
+    float sf = max( 0.0, dot( NormalVector, H ));
+    sf = pow(sf, ShininessFactor);
+
+    vec3 ambient    = MaterialAmbient  * LightAmbient;
+    vec3 diffuse    = MaterialDiffuse  * LightDiffuse;
+    vec3 specular   = MaterialSpecular * LightSpecular;
+
+    vec3 color = ambient + df * diffuse + sf * specular;
+    FinalColor = vec4(color, 1);
+
+    gl_Position = MODELVIEWPROJECTIONMATRIX * VertexPosition;
+}
